@@ -26,6 +26,13 @@ describe('plugin', () => {
                 '.block1 .block2'
             );
         });
+
+        it('with other tags', () => {
+            test(
+                ':block(block1) div :block(bl2) img',
+                '.block1 div .bl2 img'
+            );
+        });
     });
 
     describe('elem', () => {
@@ -42,6 +49,13 @@ describe('plugin', () => {
                 '.block1__elem1 .block2__elem2'
             );
         });
+
+        it('block multiple short elems', () => {
+            test(
+                ':block(block1):elem(elem1) :elem(elem2) :elem(elem3)',
+                '.block1__elem1 .block1__elem2 .block1__elem3'
+            );
+        });
     });
 
     describe('mod', () => {
@@ -50,6 +64,13 @@ describe('plugin', () => {
                 test(
                     ':block(block):mod(mod)',
                     '.block_mod'
+                );
+            });
+
+            it('block multiple short mods', () => {
+                test(
+                    ':block(block):mod(mod):mod(mod2)',
+                    '.block_mod.block_mod2'
                 );
             });
 
@@ -80,6 +101,12 @@ describe('plugin', () => {
                 test(
                     ':block(block):elem(elem):mod(mod)',
                     '.block__elem_mod'
+                );
+            });
+            it('elem multiple short mods', () => {
+                test(
+                    ':block(block):elem(elem):mod(mod):mod(mod2)',
+                    '.block__elem_mod.block__elem_mod2'
                 );
             });
 

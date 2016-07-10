@@ -24,6 +24,9 @@ It just replaces substrings in selectors:
 ```css
 :block(block):elem(elem) {}
 .block__elem {}
+
+:block(block):elem(elem) :elem(elem2) :block(block2):elem(elem) {}
+.block__elem .block__elem2 .block2__elem {}
 ```
 
 #### `:mod()`
@@ -34,6 +37,9 @@ It just replaces substrings in selectors:
 
 :block(block):mod(mod val) {}
 .block_mod_val {}
+
+:block(block):mod(mod val):mod(mod2) {}
+.block_mod_val.block_mod2 {}
 ```
 
 ```css
@@ -51,7 +57,9 @@ It's just a custom pseudo-classes, so you can use it with Less or any other CSS 
 ```less
 :block(block) {
     &:mod(mod) {
-
+        :elem(elem) {
+          
+        }
     }
 
     &:elem(elem) {
