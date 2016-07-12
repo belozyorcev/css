@@ -27,6 +27,27 @@ describe('plugin', () => {
             );
         });
 
+        it('block name with double quotes', () => {
+            test(
+                ':block("block1") :block("block2")',
+                '.block1 .block2'
+            );
+        });
+
+        it('block name with single quotes', () => {
+            test(
+                ':block(\'block1\') :block(\'block2\')',
+                '.block1 .block2'
+            );
+        });
+
+        it('with pseudo classes', () => {
+            test(
+                ':root :block(block1):mod(m v):hover::before :block(block1):nth-of-type(2)',
+                ':root .block1_m_v:hover::before .block1:nth-of-type(2)'
+            );
+        });
+
         it('with other tags', () => {
             test(
                 ':block(block1) div :block(bl2) img',
@@ -81,6 +102,13 @@ describe('plugin', () => {
                 );
             });
 
+            it('multiple blocks mods with delimeter "-" in value', () => {
+                test(
+                    ':block(block):mod(mod val-1) :block(block):elem(icon)',
+                    '.block_mod_val-1 .block__icon'
+                );
+            });
+
             it('block mod', () => {
                 test(
                     ':block(block):mod(mod val)',
@@ -88,9 +116,30 @@ describe('plugin', () => {
                 );
             });
 
+            it('block mod with double quotes', () => {
+                test(
+                    ':block("block1"):mod("mod", "val")',
+                    '.block1_mod_val'
+                );
+            });
+
+            it('block mod with single quotes', () => {
+                test(
+                    ':block(\'block1\'):mod(\'mod\',\'val\')',
+                    '.block1_mod_val'
+                );
+            });
+
             it('multiple blocks mods', () => {
                 test(
                     ':block(block1):mod(mod1 val1) :block(block2):mod(mod2 val2)',
+                    '.block1_mod1_val1 .block2_mod2_val2'
+                );
+            });
+
+            it('mod val with delimeter "->"', () => {
+                test(
+                    ':block(block1):mod(mod1 -> val1) :block(block2):mod("mod2" -> "val2")',
                     '.block1_mod1_val1 .block2_mod2_val2'
                 );
             });
